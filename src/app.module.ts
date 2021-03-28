@@ -3,7 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { OAuthRequestMiddleware } from './middleware/OAuthRequestMiddleware';
 import { OIDCService } from './services/oidc';
-import * as bodyParser from 'body-parser';
+import { json, urlencoded } from 'body-parser';
+import { OIDCRequestMiddleware } from './middleware/OIDCRequestMiddleware';
 
 @Module({
   imports: [],
@@ -12,6 +13,12 @@ import * as bodyParser from 'body-parser';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(bodyParser.json(), bodyParser.urlencoded(), OAuthRequestMiddleware).forRoutes('authorize');
+    consumer
+      .apply(
+        json(),
+        urlencoded({ extended: true }),
+        OIDCRequestMiddleware,
+        OAuthRequestMiddleware)
+      .forRoutes('authorize');
   }
 }
