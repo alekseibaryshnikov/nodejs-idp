@@ -1,0 +1,11 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "test",
+    "password": "",
+    "database": "nodejsidp",
+    "synchronize": false,
+    "logging": true,
+    "entities": ["dist/**/*.js"]
+}

@@ -4,7 +4,7 @@ import { OIDCService } from './services/oidc';
 
 @Controller('authorize')
 export class AppController {
-  constructor(private readonly oidcService: OIDCService) {}
+  constructor(private readonly oidcService: OIDCService) { }
 
   @Get()
   getAuthCodeByGet(@Query() query: OAuthRequest): string {
