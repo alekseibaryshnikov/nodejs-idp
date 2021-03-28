@@ -1,12 +1,12 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Query } from '@nestjs/common';
+import { OIDCService } from './services/oidc';
 
-@Controller()
+@Controller('authorize')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly oidcService: OIDCService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getAuthCode(@Query('client_id') client_id: string): string {
+    return JSON.stringify(this.oidcService.getAuthCode(client_id));
   }
 }
