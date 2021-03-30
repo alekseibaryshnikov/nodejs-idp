@@ -5,12 +5,13 @@ import { OAuthRequestMiddleware } from './middleware/OAuthRequestMiddleware';
 import { OIDCService } from './services/oidc';
 import { json, urlencoded } from 'body-parser';
 import { OIDCRequestMiddleware } from './middleware/OIDCRequestMiddleware';
-import { Login } from './controllers/login';
+import { LoginController } from './controllers/login.controller';
+import { UserService } from './services/user.service';
 
 @Module({
   imports: [],
-  controllers: [AppController, Login],
-  providers: [AppService, OIDCService],
+  controllers: [AppController, LoginController],
+  providers: [AppService, OIDCService, UserService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
