@@ -1,4 +1,4 @@
-import { OAuthRequest } from "./OAuthRequest";
+import { OAuthRequest } from "./OAuthRequest.model";
 
 export interface  OIDCRequest extends OAuthRequest {
     redirect_uri: string,

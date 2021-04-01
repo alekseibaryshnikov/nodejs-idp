@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from "@nestjs/common";
-import { UserCredentialsRequest } from "src/models/requests/UserCredentialsRequest";
+import { UserCredentialsRequest } from "src/models/requests/UserCredentialsRequest.model";
 import { UserService } from "src/services/user.service";
 
 @Controller('login')

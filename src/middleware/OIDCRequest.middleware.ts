@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable, NestMiddleware } from "@nestjs/common";
 import { Request } from "express";
-import { OIDCRequest } from "src/models/requests/OIDCRequest";
-import { OAuthRequestMiddleware } from "./OAuthRequestMiddleware";
+import { OIDCRequest } from "src/models/requests/OIDCRequest.model";
+import { OAuthRequestMiddleware } from "./OAuthRequest.middleware";
 
 @Injectable()
 export class OIDCRequestMiddleware extends OAuthRequestMiddleware implements NestMiddleware {

@@ -1,6 +1,6 @@
 import {  HttpException, HttpStatus, Injectable, NestMiddleware } from "@nestjs/common";
 import { Request } from "express";
-import { OAuthRequest } from "src/models/requests/OAuthRequest";
+import { OAuthRequest } from "src/models/requests/OAuthRequest.model";
 
 @Injectable()
 export class OAuthRequestMiddleware implements NestMiddleware {

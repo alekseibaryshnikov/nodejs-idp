@@ -23,7 +23,7 @@ describe('LoginController', () => {
     describe('root', () => {
         it('should return "False"', async () => {
             const result = await controller.login({ login: 'test', password: 'test' });
-            expect(result).toBe(false);
+            expect(result).toBeFalsy();
         });
     });
 });
