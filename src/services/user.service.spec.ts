@@ -2,7 +2,7 @@ import { UserService } from 'src/services/user.service';
 import { SettingsService } from './settings/settings.service';
 import * as crypto from 'crypto';
 
-describe('LoginController', () => {
+describe('UserSerivce', () => {
     describe('hash and salt', () => {
         it('should return true after salting', async () => {
             const password: string = 'password';

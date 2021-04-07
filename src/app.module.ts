@@ -1,17 +1,16 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { OAuthRequestMiddleware } from './middleware/OAuthRequest.middleware';
 import { OIDCService } from './services/oidc';
 import { json, urlencoded } from 'body-parser';
 import { OIDCRequestMiddleware } from './middleware/OIDCRequest.middleware';
 import { LoginController } from './controllers/login.controller';
 import { UserService } from './services/user.service';
+import { SettingsService } from './services/settings/settings.service';
 
 @Module({
   imports: [],
-  controllers: [AppController, LoginController],
-  providers: [AppService, OIDCService, UserService],
+  controllers: [LoginController],
+  providers: [OIDCService, UserService, SettingsService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
