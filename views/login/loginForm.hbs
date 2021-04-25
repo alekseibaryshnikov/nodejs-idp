@@ -4,17 +4,39 @@
 <head>
     <meta charset="utf-8" />
     <title>{{ appTitle }}</title>
+    <link rel="stylesheet" href="/login/style.css" />
 </head>
 
 <body>
     <form>
-        <label>{{ loginLabel }}</label>
-        <input type="text" />
+        <fieldset>
+            <legend>Login</legend>
+            
+            <div class="formField">
+                <div>
+                    <label>{{ loginLabel }}</label>
+                </div>
+                <div>
+                    <input type="text" />
+                </div>
+            </div>
 
-        <label>{{ passwordLabel }}</label>
-        <input type="password" />
+            <div class="formField">
+                <div>
+                    <label>{{ passwordLabel }}</label>
+                </div>
+                <div>
+                    <input type="password" />
+                </div>
+            </div>
+            
+            <div class="formField buttonGroup">
+                <input class="submit" type="submit" value="{{ submitLabel }}" />
+                <a href="#">Forgot password?</a>
+                <a href="#">Registration</a>
+            </div>
+        </fieldset>
 
-        <input type="submit" value="{{ submitLabel }}" />
     </form>
 </body>
 
