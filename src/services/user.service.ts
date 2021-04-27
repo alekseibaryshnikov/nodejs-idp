@@ -28,6 +28,7 @@ export class UserService {
             return user ? user.password === body.password : false;
         } catch (err) {
             console.error('Error when trying to fetch data from a db. ', err);
+            return Promise.reject();
         } finally {
             this.connection && this.connection.close();
         }

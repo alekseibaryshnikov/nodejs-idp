@@ -8,16 +8,16 @@
 </head>
 
 <body>
-    <form>
+    <form action="/login" enctype="application/x-www-form-urlencoded" method="POST">
         <fieldset>
             <legend>Login</legend>
-            
+
             <div class="formField">
                 <div>
                     <label>{{ loginLabel }}</label>
                 </div>
                 <div>
-                    <input type="text" />
+                    <input name="login" type="text" />
                 </div>
             </div>
 
@@ -26,17 +26,20 @@
                     <label>{{ passwordLabel }}</label>
                 </div>
                 <div>
-                    <input type="password" />
+                    <input name="password" type="password" />
                 </div>
             </div>
-            
+
+            {{#if errorMessage}}
+            <p class="errorMessage">{{ errorMessage }}</p>
+            {{/if}}
+
             <div class="formField buttonGroup">
                 <input class="submit" type="submit" value="{{ submitLabel }}" />
                 <a href="#">Forgot password?</a>
                 <a href="#">Registration</a>
             </div>
         </fieldset>
-
     </form>
 </body>
 
