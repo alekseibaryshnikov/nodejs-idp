@@ -6,10 +6,16 @@ import { OIDCRequestMiddleware } from './middleware/OIDCRequest.middleware';
 import { LoginController } from './controllers/login.controller';
 import { UserService } from './services/user.service';
 import { SettingsService } from './services/settings/settings.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserController } from './controllers/user.controller';
 
 @Module({
-  imports: [],
-  controllers: [LoginController],
+  imports: [
+    TypeOrmModule.forRoot({
+      keepConnectionAlive: true,
+    })
+  ],
+  controllers: [LoginController, UserController],
   providers: [OIDCService, UserService, SettingsService],
 })
 export class AppModule implements NestModule {

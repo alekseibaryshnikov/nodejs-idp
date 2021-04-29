@@ -1,8 +1,8 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { UserInfo } from "./userInfo.entity";
 
 @Entity({schema: 'users'})
 export class Credentials extends BaseEntity {
-
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -12,4 +12,6 @@ export class Credentials extends BaseEntity {
     @Column()
     password: string;
 
+    @OneToOne(() => UserInfo, userInfo => userInfo.id)
+    userInfo: UserInfo
 }

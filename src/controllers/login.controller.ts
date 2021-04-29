@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Redirect, Render, Res } from "@nestjs/common";
+import { Body, Controller, Get, Post, Render, Res } from "@nestjs/common";
 import { Response } from "express";
 import { UserCredentialsRequest } from "src/models/requests/UserCredentialsRequest.model";
 import { UserService } from "src/services/user.service";
@@ -21,12 +21,12 @@ export class LoginController {
     }
 
     @Post()
-    async login(@Res() res: Response, @Body() body: UserCredentialsRequest): Promise<boolean | void> {
+    async login(@Res() res: Response, @Body() body: UserCredentialsRequest): Promise<void | Response<JSON, Record<string, any>>> {
         try {
             this.errorMessage = undefined;
-            return await this.userService.checkCredentials(body);
+            return res.json(JSON.stringify(await this.userService.checkCredentialsAndReturnUser(body)))
         } catch (err) {
-            this.errorMessage = 'Error when checking user credentials.';
+            this.errorMessage = err || 'Error when checking user credentials.';
             return res.redirect(301, '/login');
         }
     }

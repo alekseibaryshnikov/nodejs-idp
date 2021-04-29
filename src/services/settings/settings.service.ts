@@ -1,24 +1,24 @@
 import { Injectable } from "@nestjs/common";
 import { Settings } from "src/entities/settings.entity";
-import { Connection, createConnection, getRepository } from "typeorm";
+import { getRepository } from "typeorm";
 
 @Injectable()
 export class SettingsService {
-    private connetion: Connection;
     private settings = {
         SALT: 'salt'
     }
 
     public async getSalt() {
         try {
-            this.connetion = await createConnection();
             const salt: Settings = await getRepository(Settings).findOne({name: this.settings.SALT});
-            
-            return salt.value;
+
+            if (salt) {
+                return salt.value;
+            } else {
+                throw Error(`Setting ${this.settings.SALT} doesn't exist. Check this setting in DB.`);
+            }
         } catch(err) {
-            console.error(`Error when fetching setting 'salt'. ${err}`);
-        } finally {
-            this.connetion && this.connetion.close();
+            throw Error(`Error when fetching setting 'salt'. ${err}`);
         }
     }
 }
