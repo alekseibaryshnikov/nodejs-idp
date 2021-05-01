@@ -43,4 +43,37 @@
     </form>
 </body>
 
+<script>
+    (function () {
+        const state = {
+            login: false,
+            password: false
+        }
+
+        const button = document.querySelector('input.submit');
+        const ACTIVE_CLASS = 'active';
+        const inputs = document.querySelectorAll('input');
+
+        const checkInput = (evt) => {
+            const input = evt.currentTarget;
+
+            state[input.name] = input.value.length > 3;
+
+            if (state.login && state.password) {
+                !button.classList.contains(ACTIVE_CLASS) && button.classList.add(ACTIVE_CLASS);
+                button.setAttribute('disabled', false);
+            } else {
+                button.classList.remove(ACTIVE_CLASS);
+                button.setAttribute('disabled', true);
+            }
+        };
+
+        inputs.forEach(el => {
+            el.addEventListener('keydown', checkInput)
+        });
+
+        window.close = window.removeEventListener('keydown', checkInput);
+    })();
+</script>
+
 </html>

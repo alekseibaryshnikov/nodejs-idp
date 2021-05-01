@@ -51,10 +51,19 @@ legend {
 
 .formField > input[type=submit] {
     background: #e6e6e6;
+    color: darkgray;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 5px 10px;
+    cursor: not-allowed;
+}
+
+.formField > input.active {
+    pointer-events: all;
     cursor: pointer;
+    background-color: green;
+    color: white;
+    border-color: darkgreen;
 }
 
 .buttonGroup {
