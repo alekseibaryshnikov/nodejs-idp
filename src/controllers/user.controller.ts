@@ -1,7 +1,7 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Post, Res } from "@nestjs/common";
+import { Response } from "express";
 import { Credentials } from "src/entities/credentials.entity";
 import { UserInfo } from "src/entities/userInfo.entity";
-import { CreateUserException } from "src/exceptions/database/CreateUserException";
 import { CreateUserRequest } from "src/models/requests/CreateUserRequest.model";
 import { UserService } from "src/services/user.service";
 import { getConnection } from "typeorm";
@@ -11,9 +11,9 @@ export class UserController {
   constructor(private userService: UserService) { }
 
   @Post()
-  async createUser(@Body() body: CreateUserRequest): Promise<UserInfo> {
+  async createUser(@Res() res: Response, @Body() body: CreateUserRequest): Promise<UserInfo> {
     if (this.checkUserInDB(body)) {
-      throw new CreateUserException('User with those email, mobilephone or login already exists.');
+      res.status(400).send('User with these email, mobile phone or login already exists.');
     }
 
     // Salt and hash password

@@ -2,18 +2,21 @@ import { Body, Controller, Get, Post, Query, Render, Res } from "@nestjs/common"
 import { Response } from "express";
 import { UserInfo } from "src/entities/userInfo.entity";
 import { UserCredentialsRequest } from "src/models/requests/UserCredentialsRequest.model";
+import { ErrorSerivce } from "src/services/errors/errors.service";
 import { RedisService } from "src/services/redis/redis.service";
 import { UserService } from "src/services/user.service";
 import { v4 } from 'uuid'
 
 @Controller('auth')
 export class AuthController {
-    constructor(private userService: UserService, private redisService: RedisService) { }
+    constructor(private userService: UserService, private redisService: RedisService, private errorService: ErrorSerivce) { }
     private errorMessage: string;
 
     @Get()
     @Render('login/loginForm')
-    loginForm() {
+    loginForm(@Query('error') error: string) {
+        this.errorMessage = this.errorService.getErrorMessage(error);
+        
         return {
             appTitle: 'IDP',
             loginLabel: 'Login',
@@ -36,13 +39,17 @@ export class AuthController {
 
             const userInfo: UserInfo = await this.userService.checkCredentialsAndReturnUser(body);
 
-            if (this.checkUser(userInfo)) {
-                const code: string = v4();
+            if (this.checkUser(userInfo)) { 
+                let code = (await this.redisService.getAuthcode(userInfo.id)).key;
 
-                this.redisService.setAuthcode({
-                    key: userInfo.id,
-                    value: code
-                });
+                if (!code) {
+                    code = v4();
+
+                    this.redisService.setAuthcode({
+                        key: code,
+                        value: userInfo.id
+                    });
+                }
 
                 if (redirect_uri) {
                     res.redirect(`${redirect_uri}?code=${code}&state=${state}`)

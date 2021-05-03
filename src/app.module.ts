@@ -10,6 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './controllers/user.controller';
 import { TokenController } from './controllers/token/token.controller';
 import { RedisService } from './services/redis/redis.service';
+import { ErrorSerivce } from './services/errors/errors.service';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { RedisService } from './services/redis/redis.service';
     })
   ],
   controllers: [AuthController, UserController, TokenController],
-  providers: [OIDCService, UserService, SettingsService, RedisService],
+  providers: [OIDCService, UserService, SettingsService, RedisService, ErrorSerivce],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
