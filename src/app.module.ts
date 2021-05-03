@@ -3,11 +3,13 @@ import { OAuthRequestMiddleware } from './middleware/OAuthRequest.middleware';
 import { OIDCService } from './services/oidc';
 import { json, urlencoded } from 'body-parser';
 import { OIDCRequestMiddleware } from './middleware/OIDCRequest.middleware';
-import { LoginController } from './controllers/login.controller';
+import { AuthController } from './controllers/auth/auth.controller';
 import { UserService } from './services/user.service';
 import { SettingsService } from './services/settings/settings.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './controllers/user.controller';
+import { TokenController } from './controllers/token/token.controller';
+import { RedisService } from './services/redis/redis.service';
 
 @Module({
   imports: [
@@ -15,8 +17,8 @@ import { UserController } from './controllers/user.controller';
       keepConnectionAlive: true,
     })
   ],
-  controllers: [LoginController, UserController],
-  providers: [OIDCService, UserService, SettingsService],
+  controllers: [AuthController, UserController, TokenController],
+  providers: [OIDCService, UserService, SettingsService, RedisService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

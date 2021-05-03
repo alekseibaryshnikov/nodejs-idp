@@ -26,4 +26,7 @@ export class UserInfo extends BaseEntity {
     })
     @JoinColumn()
     credentials: Credentials
+
+    @Column()
+    blocked: boolean
 }

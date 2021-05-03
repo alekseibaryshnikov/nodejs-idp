@@ -1,15 +1,15 @@
 import { Test } from '@nestjs/testing';
 import { UserService } from 'src/services/user.service';
-import { LoginController } from './login.controller';
+import { AuthController } from './auth.controller';
 import * as mocks from 'node-mocks-http';
 
 describe('LoginController', () => {
-    let controller: LoginController;
+    let controller: AuthController;
     let res: any;
 
     beforeEach(async () => {
         const moduleRef = await Test.createTestingModule({
-            controllers: [LoginController],
+            controllers: [AuthController],
             providers: [
                 {
                     provide: UserService,
@@ -19,7 +19,7 @@ describe('LoginController', () => {
                 }
             ]
         }).compile();
-        controller = moduleRef.get(LoginController);
+        controller = moduleRef.get(AuthController);
         res = mocks.createResponse();
     });
 
