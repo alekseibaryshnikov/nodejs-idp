@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { UserInfo } from "./userInfo.entity";
 
-@Entity({schema: 'users'})
+@Entity({schema: 'nodejsidp'})
 export class Credentials extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;

@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Credentials } from "./credentials.entity";
 
-@Entity({schema: 'users'})
+@Entity({schema: 'nodejsidp'})
 export class UserInfo extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
@@ -21,12 +21,12 @@ export class UserInfo extends BaseEntity {
     @Column()
     mobilePhone: number;
 
+    @Column()
+    blocked: boolean
+
     @OneToOne(() => Credentials, credentials => credentials.id, {
         cascade: true
     })
     @JoinColumn()
     credentials: Credentials
-
-    @Column()
-    blocked: boolean
 }

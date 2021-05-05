@@ -2,10 +2,19 @@
     "type": "postgres",
     "host": "localhost",
     "port": 5432,
-    "username": "test",
-    "password": "",
-    "database": "nodejsidp",
+    "username": "postgres",
+    "password": "test",
+    "database": "test-nodejsidp",
     "synchronize": false,
     "logging": true,
-    "entities": ["dist/**/*.js"]
+    "entities": [
+        "src/entities/**/*.entity.{ts,js}"
+    ],
+    "migrationsTableName": "migrations",
+    "migrations": [
+        "migration/**/*.{ts,js}"
+    ],
+    "cli": {
+        "migrationsDir": "migration"
+    }
 }

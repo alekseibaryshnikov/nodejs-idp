@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({schema: 'users'})
+@Entity({schema: 'nodejsidp'})
 export class Settings extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;

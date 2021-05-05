@@ -6,11 +6,20 @@ import { promisify } from 'util';
 export class RedisService {
   private redis: RedisClient = createClient();
   private expirationTimeForAuthCode: number = 60 * 60 * 10;
+  private expirationTimeForToken: number = 60 * 60 * 12;
 
   constructor() {
     this.redis.on('error', err => {
       throw Error(`Redis error. ${err}`);
     });
+  }
+
+  /**
+   * Put token in the cache
+   * @param data {userId: Token}
+   */
+  public setToken(data: KeyValue) {
+    this.redis.set(data.key, JSON.stringify(data.value), 'EX', this.expirationTimeForToken);
   }
 
   /**

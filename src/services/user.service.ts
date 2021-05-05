@@ -45,7 +45,7 @@ export class UserService {
      * @returns base64 string
      */
     public async saltAndHashPassword(password: string): Promise<string> {
-        const salt: string = await this.settingsService.getSalt();
+        const salt: string = await this.settingsService.getSettings(SettingsService.settings.SALT);
         return crypto.createHash('SHA256').update(password + salt).digest('base64');
     }
 
